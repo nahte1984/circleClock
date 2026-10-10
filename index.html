@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#313131">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>circleClock</title>
+<style>
+  /* Big Shoulders Display 400 (SIL OFL), subset to the glyphs used here */
+  @font-face {
+    font-family: "BigShoulders";
+    src: url(data:font/woff2;base64,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) format("woff2");
+    font-weight: 400;
+    font-display: block;
+  }
+
+  :root {
+    --bg: #313131;
+    --line: #54ffa4;
+  }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: var(--bg);
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body { position: fixed; inset: 0; }
+
+  /* ---------- clock ---------- */
+  #clock {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    touch-action: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .6s ease, visibility 0s linear .6s;
+  }
+  #clock.on {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .6s ease .15s;
+  }
+  #video {
+    position: fixed;
+    left: 0; top: 0;
+    width: 2px; height: 2px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ---------- splash ---------- */
+  #splash {
+    position: fixed;
+    inset: 0;
+    transition: opacity .45s ease;
+  }
+  #splash.off { opacity: 0; pointer-events: none; }
+
+  #emblem {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 200px; height: 200px;
+    margin: -100px 0 0 -100px;
+    transform: scale(var(--s, 1));
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%;
+    transition: transform .25s cubic-bezier(.3, 1.6, .5, 1);
+  }
+  #emblem:active { transform: scale(calc(var(--s, 1) * .96)); }
+  #emblem:focus-visible { box-shadow: 0 0 0 2px var(--line); }
+
+  #ouro {
+    position: absolute;
+    left: 50%; top: 50%;
+    width: 85px; height: 90px;
+    margin: -45px 0 0 -42.5px;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+  #title {
+    position: absolute;
+    inset: 0;
+    width: 200px; height: 200px;
+    overflow: visible;
+    pointer-events: none;
+  }
+  #title text {
+    font-family: "BigShoulders", "Arial Narrow", sans-serif;
+    font-weight: 400;
+    font-size: 38px;
+    fill: var(--line);
+    text-anchor: middle;
+  }
+
+  #msg {
+    position: absolute;
+    left: 0; right: 0;
+    top: 50%;
+    margin-top: calc(118px * var(--s, 1));
+    text-align: center;
+    font: 400 22px/1 "BigShoulders", "Arial Narrow", sans-serif;
+    letter-spacing: .06em;
+    color: var(--line);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+  #msg.show { opacity: .85; }
+</style>
+</head>
+<body>
+
+<canvas id="clock" aria-label="circleClock"></canvas>
+<video id="video" playsinline muted autoplay></video>
+
+<div id="splash">
+  <div id="emblem" role="button" tabindex="0" aria-label="circleClock — tap to start the camera">
+    <img id="ouro" src="ouroboros.png" alt="" draggable="false">
+    <svg id="title" viewBox="-100 -100 200 200" aria-hidden="true">
+      <g id="letters"></g>
+    </svg>
+  </div>
+  <div id="msg"></div>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  /* ================= config ================= */
+  const LINE      = '#54ffa4';
+  const STROKE    = 2;      // ring border & tick width (px)
+  const TICK_LEN  = 30;     // tick length from circumference toward centre (px)
+  const MARGIN    = 10;     // gap between outer ring and the screen's short edge (px)
+  const STEP      = 6;      // one gear tooth = 6° (60 teeth per turn)
+  const DEG       = Math.PI / 180;
+
+  // springs: ω (rad/s), ζ (damping ratio)
+  const SPRING_TICK   = { w: 38, z: 0.45 };  // crisp mechanical tooth-to-tooth snap
+  const SPRING_RETURN = { w: 11, z: 0.42 };  // elastic bounce back to the real time
+
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= time → gear positions ================= */
+  // every ring is a 60-tooth gear; returns the tooth index (0–59) × 6°
+  function timeAngles(d = new Date()) {
+    const s = d.getSeconds();
+    const m = d.getMinutes();
+    const h = d.getHours() % 12;
+    return {
+      s: s * STEP,
+      m: m * STEP,
+      h: (h * 5 + Math.floor(m / 12)) * STEP,   // hour hand advances one tooth every 12 min
+    };
+  }
+  // the representation of `base` (mod 360) that is closest to `ref`
+  const nearest = (base, ref) => base + 360 * Math.round((ref - base) / 360);
+  const wrap180 = a => ((a + 180) % 360 + 360) % 360 - 180;
+
+  /* ================= spring body ================= */
+  function makeBody(start) {
+    return { cur: start, vel: 0, target: start, mode: 'tick' };
+  }
+  function stepBody(b, dt) {
+    if (reduceMotion && b.mode === 'tick') { b.cur = b.target; b.vel = 0; return; }
+    const sp = b.mode === 'return' ? SPRING_RETURN : SPRING_TICK;
+    const k = sp.w * sp.w, c = 2 * sp.z * sp.w;
+    const sub = 1 / 240;
+    let t = dt;
+    while (t > 1e-6) {
+      const h = Math.min(sub, t);
+      b.vel += (k * (b.target - b.cur) - c * b.vel) * h;
+      b.cur += b.vel * h;
+      t -= h;
+    }
+    // once the elastic return has (almost) landed, hand over to the crisp tooth spring
+    if (b.mode === 'return' && Math.abs(b.target - b.cur) < 0.8 && Math.abs(b.vel) < 10) b.mode = 'tick';
+    if (Math.abs(b.target - b.cur) < 0.02 && Math.abs(b.vel) < 0.5) { b.cur = b.target; b.vel = 0; }
+  }
+
+  /* ================= splash ================= */
+  const splash  = document.getElementById('splash');
+  const emblem  = document.getElementById('emblem');
+  const letters = document.getElementById('letters');
+  const msg     = document.getElementById('msg');
+
+  const WORD = 'circleClock';
+  const BASELINE_R = 58;                       // text sits on a 116px circle (Figma text-path)
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  [...WORD].forEach((ch, i) => {
+    const g = document.createElementNS(SVGNS, 'g');
+    g.setAttribute('transform', `rotate(${(i * 360 / WORD.length).toFixed(4)})`);
+    const t = document.createElementNS(SVGNS, 'text');
+    t.setAttribute('x', '0');
+    t.setAttribute('y', String(-BASELINE_R));
+    t.textContent = ch;
+    g.appendChild(t);
+    letters.appendChild(g);
+  });
+
+  const titleBody = makeBody(timeAngles().s);
+
+  function layoutSplash() {
+    // Figma frame is 388 × 743; scale the emblem with the viewport, never below 1:1
+    const s = Math.max(1, Math.min(innerWidth / 388, innerHeight / 743, 1.8));
+    document.documentElement.style.setProperty('--s', s.toFixed(3));
+  }
+
+  /* ================= clock ================= */
+  const canvas = document.getElementById('clock');
+  const ctx    = canvas.getContext('2d');
+  const video  = document.getElementById('video');
+
+  // outer → inner : seconds, minutes, hours
+  const rings = [
+    { key: 's', f: 1,     ...makeBody(0) },
+    { key: 'm', f: 2 / 3, ...makeBody(0) },
+    { key: 'h', f: 1 / 3, ...makeBody(0) },
+  ];
+
+  let W = 0, H = 0, dpr = 1, cx = 0, cy = 0, R = 0;
+  let mirror = true;
+  let clockOn = false;
+
+  function layoutClock() {
+    dpr = Math.min(window.devicePixelRatio || 1, 3);
+    W = innerWidth; H = innerHeight;
+    canvas.width  = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    cx = W / 2; cy = H / 2;
+    R = Math.max(40, Math.min(W, H) / 2 - MARGIN);
+  }
+
+  function drawClock() {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    const vw = video.videoWidth, vh = video.videoHeight;
+    const ready = vw > 0 && vh > 0 && video.readyState >= 2;
+    // the camera frame covers the OUTER circle; all three rings share that scale
+    const cover = ready ? (2 * R) / Math.min(vw, vh) : 1;
+    const dw = vw * cover, dh = vh * cover;
+
+    for (const r of rings) {
+      const rr = R * r.f;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, rr - STROKE / 2, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.translate(cx, cy);
+      ctx.rotate(r.cur * DEG);
+      if (mirror) ctx.scale(-1, 1);
+      if (ready) ctx.drawImage(video, -dw / 2, -dh / 2, dw, dh);
+      ctx.restore();
+    }
+
+    ctx.strokeStyle = LINE;
+    ctx.lineWidth = STROKE;
+    ctx.lineCap = 'butt';
+    for (const r of rings) {
+      const rr = R * r.f;
+      ctx.beginPath();
+      ctx.arc(cx, cy, rr - STROKE / 2, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(r.cur * DEG);
+      ctx.beginPath();
+      ctx.moveTo(0, -rr);
+      ctx.lineTo(0, -rr + TICK_LEN);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  /* ---------- dragging (one pointer per ring, multi-touch ok) ---------- */
+  const drags = new Map();   // pointerId → { ring, last, accum, base }
+
+  const pointerAngle = (x, y) => Math.atan2(x - cx, -(y - cy)) / DEG;   // 0° = 12 o'clock, clockwise
+  function ringAt(x, y) {
+    const d = Math.hypot(x - cx, y - cy);
+    if (d > R) return null;
+    if (d <= R / 3) return rings[2];
+    if (d <= R * 2 / 3) return rings[1];
+    return rings[0];
+  }
+  const isDragged = ring => [...drags.values()].some(d => d.ring === ring);
+
+  function haptic() {
+    try { navigator.vibrate && navigator.vibrate(4); } catch (_) {}
+  }
+
+  canvas.addEventListener('pointerdown', e => {
+    if (!clockOn) return;
+    const ring = ringAt(e.clientX, e.clientY);
+    if (!ring || isDragged(ring)) return;
+    e.preventDefault();
+    try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
+    ring.mode = 'tick';
+    const base = Math.round(ring.cur / STEP) * STEP;
+    ring.target = base;
+    drags.set(e.pointerId, { ring, last: pointerAngle(e.clientX, e.clientY), accum: 0, base });
+    canvas.style.cursor = 'grabbing';
+  });
+
+  canvas.addEventListener('pointermove', e => {
+    const d = drags.get(e.pointerId);
+    if (!d) {
+      if (clockOn && e.pointerType === 'mouse') {
+        canvas.style.cursor = ringAt(e.clientX, e.clientY) ? 'grab' : 'default';
+      }
+      return;
+    }
+    const a = pointerAngle(e.clientX, e.clientY);
+    d.accum += wrap180(a - d.last);
+    d.last = a;
+    const snapped = d.base + Math.round(d.accum / STEP) * STEP;   // gear: only whole teeth
+    if (snapped !== d.ring.target) {
+      d.ring.target = snapped;
+      haptic();
+    }
+  });
+
+  function release(e) {
+    const d = drags.get(e.pointerId);
+    if (!d) return;
+    drags.delete(e.pointerId);
+    const ring = d.ring;
+    ring.mode = 'return';
+    ring.target = nearest(timeAngles()[ring.key], ring.cur);   // spring back, shortest way
+    if (e.pointerType === 'mouse') {
+      canvas.style.cursor = ringAt(e.clientX, e.clientY) ? 'grab' : 'default';
+    }
+  }
+  canvas.addEventListener('pointerup', release);
+  canvas.addEventListener('pointercancel', release);
+  canvas.addEventListener('lostpointercapture', release);
+  canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+  /* ================= main loop ================= */
+  let lastT = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, Math.max(0, (now - lastT) / 1000));
+    lastT = now;
+    const t = timeAngles();
+
+    if (!clockOn) {
+      titleBody.target = nearest(t.s, titleBody.target);
+      stepBody(titleBody, dt);
+      letters.setAttribute('transform', `rotate(${titleBody.cur.toFixed(3)})`);
+    } else {
+      for (const r of rings) {
+        if (!isDragged(r)) r.target = nearest(t[r.key], r.target);
+        stepBody(r, dt);
+      }
+      drawClock();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ================= camera permission ================= */
+  let starting = false;
+
+  async function start() {
+    if (starting || clockOn) return;
+    starting = true;
+    msg.classList.remove('show');
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('unsupported');
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 1280 } },
+      });
+      video.srcObject = stream;
+      try { await video.play(); } catch (_) {}
+      const track = stream.getVideoTracks()[0];
+      const settings = (track && track.getSettings) ? track.getSettings() : {};
+      mirror = settings.facingMode !== 'environment';
+
+      // the rings wind up from 12 o'clock into the current time
+      const t = timeAngles();
+      for (const r of rings) {
+        r.cur = 0; r.vel = 0;
+        r.mode = 'return';
+        r.target = nearest(t[r.key], 0);
+      }
+      layoutClock();
+      clockOn = true;
+      splash.classList.add('off');
+      canvas.classList.add('on');
+    } catch (err) {
+      msg.textContent = 'please allow camera access';
+      msg.classList.add('show');
+    } finally {
+      starting = false;
+    }
+  }
+
+  emblem.addEventListener('click', start);
+  emblem.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); }
+  });
+
+  /* ================= boot ================= */
+  function onResize() { layoutSplash(); layoutClock(); }
+  addEventListener('resize', onResize);
+  addEventListener('orientationchange', () => setTimeout(onResize, 200));
+  onResize();
+  letters.setAttribute('transform', `rotate(${titleBody.cur})`);
+  requestAnimationFrame(t => { lastT = t; frame(t); });
+})();
+</script>
+</body>
+</html>
