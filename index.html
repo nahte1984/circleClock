@@ -143,7 +143,8 @@
   /* ================= config ================= */
   const LINE      = '#ffffff';   // clock ring borders & ticks
   const STROKE    = 2;      // ring border & tick width (px)
-  const TICK_LEN  = 30;     // tick length from circumference toward centre (px)
+  const TICK_LEN_DESKTOP = 30;   // tick length from circumference toward centre (px)
+  const TICK_LEN_PHONE   = 15;   // half length on phones
   const MARGIN    = 10;     // gap between outer ring and the screen's short edge (px)
   const STEP      = 6;      // one gear tooth = 6° (60 teeth per turn)
   const DEG       = Math.PI / 180;
@@ -231,7 +232,7 @@
     { key: 'h', f: 1 / 3, ...makeBody(0) },
   ];
 
-  let W = 0, H = 0, dpr = 1, cx = 0, cy = 0, R = 0;
+  let W = 0, H = 0, dpr = 1, cx = 0, cy = 0, R = 0, tickLen = TICK_LEN_DESKTOP;
   let mirror = true;
   let clockOn = false;
 
@@ -242,6 +243,9 @@
     canvas.height = Math.round(H * dpr);
     cx = W / 2; cy = H / 2;
     R = Math.max(40, Math.min(W, H) / 2 - MARGIN);
+    // phone = touch screen whose short edge is under 600px (tablets & desktops keep 30px)
+    const isPhone = matchMedia('(pointer: coarse)').matches && Math.min(W, H) < 600;
+    tickLen = isPhone ? TICK_LEN_PHONE : TICK_LEN_DESKTOP;
   }
 
   function drawClock() {
@@ -281,7 +285,7 @@
       ctx.rotate(r.cur * DEG);
       ctx.beginPath();
       ctx.moveTo(0, -rr);
-      ctx.lineTo(0, -rr + TICK_LEN);
+      ctx.lineTo(0, -rr + tickLen);
       ctx.stroke();
       ctx.restore();
     }
